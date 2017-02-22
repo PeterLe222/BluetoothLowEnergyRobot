@@ -1,16 +1,17 @@
 #include "AFMotor.h"
 
-AF_DCMotor motor (3, MOTOR12_64KHZ);
-AF_DCMotor motor2(4, MOTOR12_64KHZ);
+AF_DCMotor MOTOR_1 (3, MOTOR12_64KHZ); // define motor on channel 3 with 64KHz PWM
+AF_DCMotor MOTOR_2 (4, MOTOR12_64KHZ); // define motor on channel 4 with 64KHz PWM
 
 void setup() {
   
   Serial.begin(9600);
-  motor.setSpeed(255);
-  motor2.setSpeed(255);
+  MOTOR_1.setSpeed(255);  // set the max speed for motor 1
+  MOTOR_2.setSpeed(255); // set the max speed for motor 1
   
 }
-char state;
+
+char state; // variable of recieving message from bluetooth
 
 void loop() {
   
@@ -19,31 +20,31 @@ void loop() {
   // go forward
   if (state == 'a' || state == 'A'|| state == 'e' || state == 'E')
   {
-    motor.run(FORWARD);
-    motor2.run(FORWARD);
+    MOTOR_1.run(FORWARD);
+    MOTOR_2.run(FORWARD);
   }
   // go backward
   if (state == 'c' || state == 'C'|| state == 'g' || state == 'G')
   {
-    motor.run(BACKWARD);
-    motor2.run(BACKWARD);
+    MOTOR_1.run(BACKWARD);
+    MOTOR_2.run(BACKWARD);
   }
   // turn left
   if (state == 'd' || state == 'D'|| state == 'h' || state == 'H')
   {
-    motor.run(FORWARD);
-    motor2.run(BACKWARD);
+    MOTOR_1.run(FORWARD);
+    MOTOR_2.run(BACKWARD);
   }
   // turn right
   if (state == 'b' || state == 'B'|| state == 'f' || state == 'F')
   {
-    motor2.run(FORWARD);
-    motor.run(BACKWARD);
+    MOTOR_2.run(FORWARD);
+    MOTOR_1.run(BACKWARD);
   }
   // stop the robot
   if (state == 0)
   {
-    motor.run(RELEASE);
-    motor2.run(RELEASE);
+    MOTOR_1.run(RELEASE);
+    MOTOR_2.run(RELEASE);
   }
 }

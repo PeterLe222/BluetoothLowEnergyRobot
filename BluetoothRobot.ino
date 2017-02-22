@@ -7,7 +7,7 @@ void setup() {
   
   Serial.begin(9600);
   MOTOR_1.setSpeed(255);  // set the max speed for motor 1
-  MOTOR_2.setSpeed(255); // set the max speed for motor 1
+  MOTOR_2.setSpeed(255);  // set the max speed for motor 2
   
 }
 
